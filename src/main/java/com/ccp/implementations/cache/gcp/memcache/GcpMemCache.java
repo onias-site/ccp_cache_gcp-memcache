@@ -18,7 +18,7 @@ class GcpMemCache implements CcpCache {
 
 		Object object = memcacheService.get(key);
 
-		boolean isNotMap = object instanceof Map == false;
+		boolean isNotMap = false == object instanceof Map;
 
 		if (isNotMap) {
 			return object;
