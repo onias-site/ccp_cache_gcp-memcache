@@ -9,6 +9,10 @@ import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
+/**
+ * Implementação concreta de CcpCache usando o serviço Memcache do Google App Engine.
+ * Suporta get, put com TTL e delete com retorno do valor anterior.
+ */
 class GcpMemCache implements CcpCache {
 	
 	private static MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
