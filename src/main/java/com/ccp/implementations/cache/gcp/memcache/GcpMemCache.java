@@ -16,7 +16,7 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
 class GcpMemCache implements CcpCache {
 	
 	private static MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
-
+ 
 	@SuppressWarnings("unchecked")
 	public Object get(String key) {
 
