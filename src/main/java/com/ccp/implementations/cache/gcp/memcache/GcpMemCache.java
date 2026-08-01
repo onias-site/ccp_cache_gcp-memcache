@@ -14,7 +14,7 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
  * Suporta get, put com TTL e delete com retorno do valor anterior.
  */
 class GcpMemCache implements CcpCache {
-	
+	 
 	private static MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
  
 	@SuppressWarnings("unchecked")
