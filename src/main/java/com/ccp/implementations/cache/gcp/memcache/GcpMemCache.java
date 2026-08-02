@@ -22,7 +22,7 @@ class GcpMemCache implements CcpCache {
 
 		Object object = memcacheService.get(key);
 
-		boolean isNotMap = false == object instanceof Map;
+		boolean isNotMap = false == object instanceof Map; 
 
 		if (isNotMap) {
 			return object;
