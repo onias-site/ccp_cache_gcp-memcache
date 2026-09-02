@@ -21,8 +21,9 @@ class GcpMemCache implements CcpCache {
 	public Object get(String key) {
 
 		Object object = memcacheService.get(key);
+		boolean isMap = object instanceof Map;
 
-		boolean isNotMap = false == object instanceof Map; 
+		boolean isNotMap = false == isMap; 
 
 		if (isNotMap) {
 			return object;
@@ -37,7 +38,8 @@ class GcpMemCache implements CcpCache {
 
 	public CcpCache put(String key, Object value, int secondsDelay) {
 		Expiration arg2 = Expiration.byDeltaSeconds(secondsDelay);
-		if(value instanceof CcpJsonRepresentation) {
+		boolean isCcpJsonRepresentation = value instanceof CcpJsonRepresentation;
+		if(isCcpJsonRepresentation) {
 			CcpJsonRepresentation jr = (CcpJsonRepresentation)value;
 			value = new LinkedHashMap<>(jr.content);
 		}
@@ -47,8 +49,9 @@ class GcpMemCache implements CcpCache {
 
 	@SuppressWarnings("unchecked")
 	public <V> V delete(String key) {
-		
-		V t = (V) this.get(key);
+		var get = this.get(key);
+	
+		V t = (V) get;
 		
 		memcacheService.delete(key);
 		
