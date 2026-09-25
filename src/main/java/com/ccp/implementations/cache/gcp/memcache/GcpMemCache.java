@@ -1,5 +1,6 @@
 package com.ccp.implementations.cache.gcp.memcache;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -47,15 +48,15 @@ class GcpMemCache implements CcpCache {
 		return this;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <V> V delete(String key) {
-		var get = this.get(key);
-	
-		V t = (V) get;
-		
+	public void delete(String key) {
 		memcacheService.delete(key);
-		
-		return t;
+	}
+
+	/**
+	 * Apaga todas as chaves numa única chamada ao Memcache, em vez de uma por chave.
+	 */
+	public void deleteAll(Collection<String> keys) {
+		memcacheService.deleteAll(keys);
 	}
 
 }
