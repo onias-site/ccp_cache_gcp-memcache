@@ -4,7 +4,7 @@ import com.ccp.dependency.injection.CcpInstanceProvider;
 import com.ccp.especifications.cache.CcpCache;
 
 /**
- * Provedor de DI que expõe GcpMemCache como implementação de CcpCache no Google Cloud Platform.
+ * DI provider that exposes GcpMemCache as the CcpCache implementation on Google Cloud Platform.
  */
 public class CcpGcpMemCache implements CcpInstanceProvider<CcpCache> {
 

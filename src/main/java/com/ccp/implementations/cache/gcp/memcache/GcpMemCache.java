@@ -11,8 +11,8 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 /**
- * Implementação concreta de CcpCache usando o serviço Memcache do Google App Engine.
- * Suporta get, put com TTL e delete com retorno do valor anterior.
+ * Concrete CcpCache implementation backed by the Google App Engine Memcache service.
+ * Supports get, put with TTL and delete returning the previous value.
  */
 class GcpMemCache implements CcpCache {
 	 
@@ -32,19 +32,19 @@ class GcpMemCache implements CcpCache {
 
 		Map<String, Object> map = (Map<String, Object>) object;
 
-		CcpJsonRepresentation jr = new CcpJsonRepresentation(map);
-		return jr;
+		CcpJsonRepresentation cachedJson = new CcpJsonRepresentation(map);
+		return cachedJson;
 	}
 
 
 	public CcpCache put(String key, Object value, int secondsDelay) {
-		Expiration arg2 = Expiration.byDeltaSeconds(secondsDelay);
+		Expiration expiration = Expiration.byDeltaSeconds(secondsDelay);
 		boolean isCcpJsonRepresentation = value instanceof CcpJsonRepresentation;
 		if(isCcpJsonRepresentation) {
-			CcpJsonRepresentation jr = (CcpJsonRepresentation)value;
-			value = new LinkedHashMap<>(jr.content);
+			CcpJsonRepresentation jsonValue = (CcpJsonRepresentation)value;
+			value = new LinkedHashMap<>(jsonValue.content);
 		}
-		memcacheService.put(key, value, arg2);
+		memcacheService.put(key, value, expiration);
 		return this;
 	}
 
@@ -53,7 +53,7 @@ class GcpMemCache implements CcpCache {
 	}
 
 	/**
-	 * Apaga todas as chaves numa única chamada ao Memcache, em vez de uma por chave.
+	 * Deletes all keys in a single Memcache call instead of one call per key.
 	 */
 	public void deleteAll(Collection<String> keys) {
 		memcacheService.deleteAll(keys);
