@@ -8,7 +8,7 @@ import com.ccp.especifications.cache.CcpCache;
  */
 public class CcpGcpMemCache implements CcpInstanceProvider<CcpCache> {
 
-	public CcpCache getInstance() {
+	public CcpCache getInstance() { 
 		GcpMemCache gcpMemCache = new GcpMemCache();
 		return gcpMemCache; 
 	}
