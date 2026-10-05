@@ -8,6 +8,10 @@ import com.ccp.especifications.cache.CcpCache;
  */
 public class CcpGcpMemCache implements CcpInstanceProvider<CcpCache> {
 
+	/**
+	 * Builds the Memcache implementation of {@code CcpCache}.
+	 * @return a new {@code GcpMemCache}
+	 */
 	public CcpCache getInstance() { 
 		GcpMemCache gcpMemCache = new GcpMemCache();
 		return gcpMemCache; 
