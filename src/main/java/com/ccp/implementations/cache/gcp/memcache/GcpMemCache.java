@@ -15,7 +15,11 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
  * and batch delete. JSON values are stored as maps and read back as {@code CcpJsonRepresentation}.
  */
 class GcpMemCache implements CcpCache {
-	 
+	/** The single instance: the class keeps no state. */
+	public final static GcpMemCache INSTANCE = new GcpMemCache();
+
+	private GcpMemCache() {}
+
 	/** The Memcache client shared by every instance. */
 	private static MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
  
